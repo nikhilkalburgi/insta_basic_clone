@@ -25,11 +25,13 @@ exports.handleCallback = async (req, res) => {
   
   try {
     // Exchange code for access token
+    const redirectUri = req.app.locals.instagramRedirectUri;
+    console.log(redirectUri);
     const tokenResponse = await axios.post('https://api.instagram.com/oauth/access_token', {
       client_id: keys.INSTAGRAM_CLIENT_ID,
       client_secret: keys.INSTAGRAM_CLIENT_SECRET,
       grant_type: 'authorization_code',
-      redirect_uri: keys.REDIRECT_URI,
+      redirect_uri: redirectUri,
       code
     }, {
       headers: {
@@ -67,11 +69,11 @@ exports.handleCallback = async (req, res) => {
       keys.JWT_SECRET,
       { expiresIn: '7d' }
     );
-    const redirectUri = req.app.locals.appDomain;
-    console.log('AppDomain',redirectUri, req.app.locals.instagramRedirectUri);
+    const appDomain = req.app.locals.appDomain;
+    console.log('AppDomain',appDomain, req.app.locals.instagramRedirectUri);
     
     // Redirect to frontend with token
-    res.redirect(`${redirectUri}/auth/success?token=${token}`);
+    res.redirect(`${appDomain}/auth/success?token=${token}`);
     
   } catch (error) {
     console.error('Instagram auth error:', error.response?.data || error.message);
