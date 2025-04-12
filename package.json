@@ -1,0 +1,15 @@
+{
+    "name": "instagram-mern-app",
+    "version": "1.0.0",
+    "description": "Instagram API Integration App",
+    "engines": {
+      "node": "14.x"
+    },
+    "scripts": {
+      "start": "cd backend && npm start",
+      "heroku-postbuild": "npm run install-backend && npm run install-frontend && npm run build",
+      "install-backend": "cd backend && npm install",
+      "install-frontend": "cd frontend && npm install",
+      "build": "cd frontend && npm run build"
+    }
+  }
