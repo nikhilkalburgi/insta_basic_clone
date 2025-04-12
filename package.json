@@ -3,7 +3,7 @@
     "version": "1.0.0",
     "description": "Instagram API Integration App",
     "engines": {
-      "node": "14.x"
+      "node": "20.x"
     },
     "scripts": {
       "start": "cd backend && npm start",
